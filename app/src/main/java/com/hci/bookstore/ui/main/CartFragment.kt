@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.hci.bookstore.R
 
 class CartFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
