@@ -14,23 +14,20 @@ import com.hci.bookstore.ui.main.CatalogAdapter
 import com.hci.bookstore.ui.main.HomeFragment
 
 
-class BookService{
-    var mRequestQueue: RequestQueue
+class BookService(var fragment: Fragment) {
+    private var mRequestQueue: RequestQueue
     private val gson: Gson
-    var fragment: Fragment
     private val url = "http://enigmatic-fjord-21043.herokuapp.com/api/"
 
-    constructor(fragment : Fragment){
-        this.fragment = fragment
+    init {
         mRequestQueue = Volley.newRequestQueue(fragment.context)
         gson = Gson()
-
     }
 
     fun getBook(id: Int) {
         val request = JsonObjectRequest(
             Request.Method.GET,
-            "http://enigmatic-fjord-21043.herokuapp.com/api/store/books/1", null, Response.Listener<JSONObject> { response ->
+            "$url/store/books/$id", null, Response.Listener<JSONObject> { response ->
                 try {
                     Log.println(Log.INFO,null, "here")
                     val home = fragment as HomeFragment
