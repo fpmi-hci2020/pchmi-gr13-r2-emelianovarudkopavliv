@@ -13,6 +13,7 @@
         android:layout_width="380dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:background="@color/white"
         android:gravity="center"
         android:hint="@android:string/search_go"

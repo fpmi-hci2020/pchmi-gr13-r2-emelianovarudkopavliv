@@ -17,7 +17,7 @@ import com.hci.bookstore.ui.main.HomeFragment
 class BookService(var fragment: Fragment) {
     private var mRequestQueue: RequestQueue
     private val gson: Gson
-    private val url = "http://enigmatic-fjord-21043.herokuapp.com/api/"
+    private val url = "http://enigmatic-fjord-21043.herokuapp.com/api"
 
     init {
         mRequestQueue = Volley.newRequestQueue(fragment.context)
