@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="@color/ultraLight"
+    android:orientation="vertical"
+    tools:context=".ui.main.HomeFragment">
+
+    <EditText
+        android:id="@+id/searchText"
+        android:layout_width="380dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:gravity="center"
+        android:hint="@android:string/search_go"
+        android:inputType="date"
+        android:padding="5dp"
+        android:textColor="@color/main"
+        android:textColorHint="@color/main" />
+
+    <RadioGroup
+        android:id="@+id/filterGroup"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@color/secondarySat"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/titleButton"
+            android:layout_width="83dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="@color/accent"
+            android:checked="true"
+            android:text="title"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/authorButton"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/accent"
+            android:text="author"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/genreButton"
+            android:layout_width="92dp"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/accent"
+            android:text="genre"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/publisherButton"
+            android:layout_width="115dp"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/accent"
+            android:text="publisher"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+    </RadioGroup>
+
+    <GridView
+        android:id="@+id/grid"
+        android:layout_width="380dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:columnWidth="190dp"
+        android:gravity="center"
+        android:numColumns="auto_fit"
+        android:stretchMode="spacingWidthUniform"
+        android:verticalSpacing="5dp" />
+
+</LinearLayout>
+
