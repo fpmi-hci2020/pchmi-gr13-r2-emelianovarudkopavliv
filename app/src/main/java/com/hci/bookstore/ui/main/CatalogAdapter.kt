@@ -8,12 +8,14 @@ import android.widget.BaseAdapter
 import android.view.LayoutInflater
 import android.widget.ImageView
 import com.hci.bookstore.Book
+import com.hci.bookstore.BookService
 import com.hci.bookstore.R
 
-class CatalogAdapter(context: Context, books: List<Book>): BaseAdapter() {
+class CatalogAdapter(context: Context, books: Array<Book>, service: BookService): BaseAdapter() {
 
     private val books = books
     private val mContext: Context = context
+    private val service = service
 
     override fun getCount(): Int {
         return books.size
@@ -39,7 +41,8 @@ class CatalogAdapter(context: Context, books: List<Book>): BaseAdapter() {
         val authorView = view?.findViewById<TextView>(R.id.catalogBookAuthor)
         val priceView = view?.findViewById<TextView>(R.id.catalogBookPrice)
 
-        imageView?.setImageResource(R.drawable.forest)
+
+        service.getBookCover(book.id, imageView!!)
         titleView?.text = book.title
         authorView?.text = book.author
         priceView?.text = book.price.toString()

@@ -1,6 +1,7 @@
 package com.hci.bookstore
 
 class Book {
+    var id: Int = 0
     lateinit var title: String
     lateinit var author: String
     lateinit var genre: String
@@ -8,7 +9,8 @@ class Book {
     var price: Float = 0f
     var imageResource: Int = 0
 
-    constructor(title: String, author: String, genre: String, description: String, price: Float, resource: Int) {
+    constructor(id:Int, title: String, author: String, genre: String, description: String, price: Float, resource: Int) {
+        this.id = id
         this.title = title
         this.author = author
         this.genre = genre
