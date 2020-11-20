@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.hci.bookstore.R
-import android.content.Intent
 import android.widget.TextView
 import android.widget.Toast
-import com.hci.bookstore.MainActivity
+import com.hci.bookstore.BookService
+import com.hci.bookstore.User
 
 
 class SignUpFragment : Fragment(), View.OnClickListener {
@@ -20,9 +20,7 @@ class SignUpFragment : Fragment(), View.OnClickListener {
     lateinit var repeatPassword: TextView
 
     override fun onClick(v: View?) {
-        if(validateUserData()) {
-            startActivity(Intent(activity, MainActivity::class.java))
-        }
+        registerUser()
     }
 
     override fun onCreateView(
@@ -37,14 +35,13 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         button.setOnClickListener(this)
         return root
     }
-    private fun validateUserData() : Boolean{
+    private fun registerUser() {
         if (email.text.isNullOrEmpty() || password.text.isNullOrEmpty()|| repeatPassword.text.isNullOrEmpty()) {
             Toast.makeText(context, "Fill all fields!", Toast.LENGTH_LONG).show()
-            return false
         }
         if( android.util.Patterns.EMAIL_ADDRESS.matcher(email.text).matches()) {
             if(password.text.toString() == repeatPassword.text.toString()){
-                return true
+                BookService(this).registerUser(User(email.text.toString(), password.text.toString()))
             }
             else{
                 Toast.makeText(context, "Passwords do not match!", Toast.LENGTH_LONG).show()
@@ -53,7 +50,5 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         else{
             Toast.makeText(context, "Incorrect email!", Toast.LENGTH_LONG).show()
         }
-        return false
-
     }
 }
