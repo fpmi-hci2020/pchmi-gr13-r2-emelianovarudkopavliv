@@ -7,11 +7,8 @@
     <string name="sign_in">Sign in</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pre_order">Pre-order</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="add_to_favorites">Add to\nFavorites</string>
+    <string name="subscribe">Subscribe to news from\npublisher</string>
 </resources>

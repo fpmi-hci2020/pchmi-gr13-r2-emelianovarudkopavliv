@@ -8,7 +8,6 @@ import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
 import com.hci.bookstore.ui.main.SectionsPagerAdapter
 
-
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         startActivity(Intent(this, LoginActivity::class.java))
@@ -17,7 +16,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
+        val sectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
         val viewPager: ViewPager = findViewById(R.id.view_pager)
         viewPager.adapter = sectionsPagerAdapter
 
@@ -34,6 +33,5 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
     }
-
 
 }

@@ -9,7 +9,7 @@ import android.widget.Button
 import com.hci.bookstore.R
 import android.widget.TextView
 import android.widget.Toast
-import com.hci.bookstore.BookService
+import com.hci.bookstore.BookStoreService
 import com.hci.bookstore.User
 
 
@@ -41,7 +41,7 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         }
         if( android.util.Patterns.EMAIL_ADDRESS.matcher(email.text).matches()) {
             if(password.text.toString() == repeatPassword.text.toString()){
-                BookService(this).registerUser(User(email.text.toString(), password.text.toString()))
+                BookStoreService(this).registerUser(User(email.text.toString(), password.text.toString()))
             }
             else{
                 Toast.makeText(context, "Passwords do not match!", Toast.LENGTH_LONG).show()

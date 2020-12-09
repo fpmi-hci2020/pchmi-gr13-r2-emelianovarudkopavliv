@@ -13,22 +13,15 @@ import com.android.volley.toolbox.*
 import org.json.JSONException
 import org.json.JSONObject
 import com.google.gson.Gson
-import com.hci.bookstore.ui.main.CatalogAdapter
-import com.hci.bookstore.ui.main.HomeFragment
-import com.hci.bookstore.ui.main.SignInFragment
-import com.hci.bookstore.ui.main.SignUpFragment
+import com.google.gson.JsonObject
+import com.hci.bookstore.ui.main.*
 import org.json.JSONArray
 
 
-class BookService(var fragment: Fragment) {
-    private var mRequestQueue: RequestQueue
-    private val gson: Gson
+class BookStoreService(var fragment: Fragment) {
+    private var mRequestQueue = Volley.newRequestQueue(fragment.context)
+    private val gson = Gson()
     private val url = "http://enigmatic-fjord-21043.herokuapp.com/api"
-
-    init {
-        mRequestQueue = Volley.newRequestQueue(fragment.context)
-        gson = Gson()
-    }
 
     fun registerUser(user: User) {
         val request = JsonObjectRequest(
@@ -66,7 +59,7 @@ class BookService(var fragment: Fragment) {
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
-            }, Response.ErrorListener { error ->
+            }, Response.ErrorListener { _ ->
                 Toast.makeText(
                     fragment.context, "User with this email doesn't exist!",
                     Toast.LENGTH_LONG
@@ -84,6 +77,22 @@ class BookService(var fragment: Fragment) {
                     val home = fragment as HomeFragment
                     home.books = gson.fromJson(response.toString(), Array<Book>::class.java)
                     home.grid.adapter = CatalogAdapter(fragment.context!!, home.books, this)
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }, Response.ErrorListener { error ->
+                error.printStackTrace()
+            })
+
+        mRequestQueue.add(request)
+    }
+
+    fun getBook(id: Int) {
+        val request = JsonObjectRequest(
+            Request.Method.GET,
+            "$url/store/books$id", null, Response.Listener<JSONObject> { response ->
+                try {
+                    var book = gson.fromJson(response.toString(), Book::class.java)
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }

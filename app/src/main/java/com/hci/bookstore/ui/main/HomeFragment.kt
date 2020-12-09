@@ -9,10 +9,9 @@ import androidx.fragment.app.Fragment
 import com.hci.bookstore.R
 import android.widget.RadioButton
 import com.hci.bookstore.Book
-import com.hci.bookstore.BookService
+import com.hci.bookstore.BookStoreService
 
 class HomeFragment : Fragment() {
-
     lateinit var books: Array<Book>
     lateinit var grid: GridView
 
@@ -28,22 +27,22 @@ class HomeFragment : Fragment() {
             root!!.findViewById(R.id.publisherButton)
             )
 
-        val service = BookService(this)
+        val service = BookStoreService(this)
         service.getBooks()
 
         grid = root.findViewById(R.id.grid) as GridView
 
-        grid.setOnItemClickListener { p, v, position, id ->
+        grid.setOnItemClickListener { p, v, position, _ ->
             val nextFrag = BookFragment()
+
             val arguments = Bundle()
-            arguments.putInt("books", position)
+            arguments.putParcelable("book", (grid.adapter as CatalogAdapter).books[position])
             nextFrag.arguments = arguments
-            activity!!.supportFragmentManager.beginTransaction()
-                .replace(((view as ViewGroup).parent as View).id, nextFrag, "findThisFragment")
+            childFragmentManager.beginTransaction()
+                .replace(R.id.home_fragment, nextFrag)
                 .addToBackStack(null)
                 .commit()
         }
-
         return root
     }
 }

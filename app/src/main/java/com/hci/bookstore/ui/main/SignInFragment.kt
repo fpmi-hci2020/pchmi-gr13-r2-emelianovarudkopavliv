@@ -8,7 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.hci.bookstore.BookService
+import com.hci.bookstore.BookStoreService
 import com.hci.bookstore.R
 
 class SignInFragment : Fragment(), View.OnClickListener {
@@ -38,7 +38,7 @@ class SignInFragment : Fragment(), View.OnClickListener {
             Toast.makeText(context, "Fill all fields!", Toast.LENGTH_LONG).show()
         }
         if( android.util.Patterns.EMAIL_ADDRESS.matcher(email.text).matches()) {
-            BookService(this).getUser(email.text.toString())
+            BookStoreService(this).getUser(email.text.toString())
         }
         else{
             Toast.makeText(context, "Incorrect email!", Toast.LENGTH_LONG).show()

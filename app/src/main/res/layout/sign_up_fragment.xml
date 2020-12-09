@@ -13,6 +13,7 @@
     tools:context=".ui.main.SignUpFragment">
 
     <EditText
+        style="@style/EditText"
         android:id="@+id/up_email"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -20,19 +21,15 @@
         android:layout_marginTop="56dp"
 
         android:layout_marginEnd="24dp"
-        android:background="@color/white"
-        android:gravity="center"
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
-        android:textColor="@color/main"
-        android:textColorHint="@color/main"
-        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        style="@style/EditText"
         android:id="@+id/up_password"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -40,19 +37,15 @@
         android:layout_marginTop="20dp"
 
         android:layout_marginEnd="24dp"
-        android:background="@color/white"
-        android:gravity="center"
         android:hint="@string/prompt_password"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
-        android:textColor="@color/main"
-        android:textColorHint="@color/main"
-        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/up_email" />
 
     <EditText
+        style="@style/EditText"
         android:id="@+id/up_password2"
         android:layout_width="0dp"
         android:layout_height="50dp"
@@ -60,29 +53,21 @@
 
         android:layout_marginTop="20dp"
         android:layout_marginEnd="24dp"
-        android:background="@color/white"
-        android:gravity="center"
         android:hint="@string/repeat_password"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
-        android:textColor="@color/main"
-        android:textColorHint="@color/main"
-        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/up_password" />
 
     <Button
+        style="@style/Button"
         android:id="@+id/signUpButton"
         android:layout_width="132dp"
         android:layout_height="48dp"
         android:layout_gravity="start"
-        android:background="@color/secondarySat"
         android:text="@string/sign_up"
-
-        android:textColor="@color/white"
-        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

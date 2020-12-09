@@ -8,12 +8,12 @@ import android.widget.BaseAdapter
 import android.view.LayoutInflater
 import android.widget.ImageView
 import com.hci.bookstore.Book
-import com.hci.bookstore.BookService
+import com.hci.bookstore.BookStoreService
 import com.hci.bookstore.R
 
-class CatalogAdapter(context: Context, books: Array<Book>, service: BookService): BaseAdapter() {
+class CatalogAdapter(context: Context, books: Array<Book>, service: BookStoreService): BaseAdapter() {
 
-    private val books = books
+    val books = books
     private val mContext: Context = context
     private val service = service
 
@@ -40,7 +40,6 @@ class CatalogAdapter(context: Context, books: Array<Book>, service: BookService)
         val titleView = view?.findViewById<TextView>(R.id.catalogBookTitle)
         val authorView = view?.findViewById<TextView>(R.id.catalogBookAuthor)
         val priceView = view?.findViewById<TextView>(R.id.catalogBookPrice)
-
 
         service.getBookCover(book.id, imageView!!)
         titleView?.text = book.title
