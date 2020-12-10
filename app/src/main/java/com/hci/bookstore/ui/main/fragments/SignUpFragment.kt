@@ -1,4 +1,4 @@
-package com.hci.bookstore.ui.main
+package com.hci.bookstore.ui.main.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,8 +9,8 @@ import android.widget.Button
 import com.hci.bookstore.R
 import android.widget.TextView
 import android.widget.Toast
-import com.hci.bookstore.BookStoreService
-import com.hci.bookstore.User
+import com.hci.bookstore.services.BookStoreService
+import com.hci.bookstore.models.User
 
 
 class SignUpFragment : Fragment(), View.OnClickListener {
@@ -41,7 +41,12 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         }
         if( android.util.Patterns.EMAIL_ADDRESS.matcher(email.text).matches()) {
             if(password.text.toString() == repeatPassword.text.toString()){
-                BookStoreService(this).registerUser(User(email.text.toString(), password.text.toString()))
+                BookStoreService(this).registerUser(
+                    User(
+                        email.text.toString(),
+                        password.text.toString()
+                    )
+                )
             }
             else{
                 Toast.makeText(context, "Passwords do not match!", Toast.LENGTH_LONG).show()

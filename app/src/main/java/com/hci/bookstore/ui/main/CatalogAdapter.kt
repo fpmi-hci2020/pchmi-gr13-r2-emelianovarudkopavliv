@@ -7,15 +7,24 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.view.LayoutInflater
 import android.widget.ImageView
-import com.hci.bookstore.Book
-import com.hci.bookstore.BookStoreService
+import com.hci.bookstore.models.Book
+import com.hci.bookstore.services.BookStoreService
 import com.hci.bookstore.R
 
 class CatalogAdapter(context: Context, books: Array<Book>, service: BookStoreService): BaseAdapter() {
 
-    val books = books
+    private var books = books
     private val mContext: Context = context
     private val service = service
+
+    fun updateItems(newBooks: Array<Book>){
+        books = newBooks
+        notifyDataSetChanged()
+    }
+
+    fun getBookOnPosition (position: Int) : Book{
+        return books[position]
+    }
 
     override fun getCount(): Int {
         return books.size

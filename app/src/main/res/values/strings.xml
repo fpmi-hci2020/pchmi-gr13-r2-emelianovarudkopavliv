@@ -11,4 +11,8 @@
     <string name="add_to_cart">Add to Cart</string>
     <string name="add_to_favorites">Add to\nFavorites</string>
     <string name="subscribe">Subscribe to news from\npublisher</string>
+    <string name="title">title</string>
+    <string name="author">author</string>
+    <string name="genre">genre</string>
+    <string name="publisher">publisher</string>
 </resources>

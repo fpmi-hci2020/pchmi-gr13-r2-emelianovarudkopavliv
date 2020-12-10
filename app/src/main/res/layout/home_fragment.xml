@@ -11,16 +11,17 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/searchText"
-            style="@style/EditText"
+        <SearchView
+            android:id="@+id/searchView"
             android:layout_width="380dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:hint="@android:string/search_go"
-            android:inputType="date"
-            android:padding="5dp" />
+            android:background="@color/white"
+            android:iconifiedByDefault="false"
+            android:padding="5dp"
+            android:queryHint="@android:string/search_go"
+            android:theme="@style/SearchView" />
 
         <RadioGroup
             android:id="@+id/filterGroup"
@@ -39,7 +40,8 @@
                 android:layout_weight="1"
                 android:buttonTint="@color/accent"
                 android:checked="true"
-                android:text="title" />
+                android:tag="@string/title"
+                android:text="@string/title" />
 
             <RadioButton
                 android:id="@+id/authorButton"
@@ -47,7 +49,8 @@
                 android:layout_width="94dp"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/accent"
-                android:text="author" />
+                android:tag="@string/author"
+                android:text="@string/author" />
 
             <RadioButton
                 android:id="@+id/genreButton"
@@ -55,7 +58,8 @@
                 android:layout_width="92dp"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/accent"
-                android:text="genre" />
+                android:tag="@string/genre"
+                android:text="@string/genre" />
 
             <RadioButton
                 android:id="@+id/publisherButton"
@@ -63,7 +67,8 @@
                 android:layout_width="115dp"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/accent"
-                android:text="publisher" />
+                android:tag="@string/publisher"
+                android:text="@string/publisher" />
 
         </RadioGroup>
 

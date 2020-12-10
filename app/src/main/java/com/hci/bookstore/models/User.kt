@@ -1,4 +1,4 @@
-package com.hci.bookstore
+package com.hci.bookstore.models
 
 class User {
     lateinit var email: String

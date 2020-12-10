@@ -1,4 +1,4 @@
-package com.hci.bookstore.ui.main
+package com.hci.bookstore.ui.main.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.hci.bookstore.BookStoreService
+import com.hci.bookstore.services.BookStoreService
 import com.hci.bookstore.R
 
 class SignInFragment : Fragment(), View.OnClickListener {

@@ -1,4 +1,4 @@
-package com.hci.bookstore
+package com.hci.bookstore.services
 
 import android.content.Intent
 import android.graphics.Bitmap
@@ -7,14 +7,17 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import com.android.volley.Request
-import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.*
 import org.json.JSONException
 import org.json.JSONObject
 import com.google.gson.Gson
-import com.google.gson.JsonObject
+import com.hci.bookstore.MainActivity
+import com.hci.bookstore.models.Book
+import com.hci.bookstore.models.User
 import com.hci.bookstore.ui.main.*
+import com.hci.bookstore.ui.main.fragments.HomeFragment
+import com.hci.bookstore.ui.main.fragments.SignInFragment
 import org.json.JSONArray
 
 

@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.hci.bookstore.R
+import com.hci.bookstore.ui.main.fragments.SignInFragment
+import com.hci.bookstore.ui.main.fragments.SignUpFragment
 
 private val TAB_TITLES = arrayOf(
     R.string.sign_in,

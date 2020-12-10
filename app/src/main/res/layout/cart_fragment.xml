@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/ultraLight"
-    tools:context=".ui.main.CartFragment">
+    tools:context=".ui.main.fragments.CartFragment">
 
     <TextView
         android:id="@+id/section_label"

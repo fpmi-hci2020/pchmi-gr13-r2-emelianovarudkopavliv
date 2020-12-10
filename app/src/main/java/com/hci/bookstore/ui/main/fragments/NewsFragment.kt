@@ -1,4 +1,4 @@
-package com.hci.bookstore.ui.main
+package com.hci.bookstore.ui.main.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,13 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.hci.bookstore.R
 
-class OrdersFragment : Fragment() {
+class NewsFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.orders_fragment, container, false)
+        val root = inflater.inflate(R.layout.news_fragment, container, false)
         return root
     }
 }

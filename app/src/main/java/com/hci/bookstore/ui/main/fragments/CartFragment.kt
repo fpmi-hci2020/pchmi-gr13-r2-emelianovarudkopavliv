@@ -1,4 +1,4 @@
-package com.hci.bookstore.ui.main
+package com.hci.bookstore.ui.main.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,13 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.hci.bookstore.R
 
-class FavoritesFragment : Fragment() {
-
+class CartFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.favorites_fragment, container, false)
-        return root
+        return inflater.inflate(R.layout.cart_fragment, container, false)
     }
 }
