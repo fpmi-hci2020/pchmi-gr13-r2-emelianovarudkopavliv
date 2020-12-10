@@ -1,24 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/ultraLight"
+    android:orientation="vertical"
     tools:context=".ui.main.fragments.CartFragment">
 
-    <TextView
-        android:id="@+id/section_label"
+    <ListView
+        android:id="@+id/cartView"
+        android:layout_width="380dp"
+        android:layout_height="310dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/list_view"
+        android:divider="@null"
+        android:dividerHeight="20dp">
+
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/paymentView"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:text="@string/payment"
+            android:textColor="@color/main"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/shippingView"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/shipping"
+            android:textColor="@color/main"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <RadioGroup
+            android:id="@+id/paymentGroup"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/secondarySat"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/cardButton"
+                style="@style/RadioButton"
+                android:layout_width="83dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_weight="1"
+                android:buttonTint="@color/accent"
+                android:checked="true"
+                android:tag="card"
+                android:text="@string/card" />
+
+            <RadioButton
+                android:id="@+id/cashButton"
+                style="@style/RadioButton"
+                android:layout_width="94dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:buttonTint="@color/accent"
+                android:tag="cash"
+                android:text="@string/cash" />
+
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/deliveryGroup"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="@color/secondarySat"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/pickUpButton"
+                style="@style/RadioButton"
+                android:layout_width="101dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_weight="1"
+                android:buttonTint="@color/accent"
+                android:checked="true"
+                android:tag="pick up"
+                android:text="@string/pick_up" />
+
+            <RadioButton
+                android:id="@+id/deliveryButton"
+                style="@style/RadioButton"
+                android:layout_width="94dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:buttonTint="@color/accent"
+                android:tag="delivery"
+                android:text="@string/delivery" />
+
+        </RadioGroup>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button"
+        style="@style/AccentButton"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="@string/make_an_order" />
+
+</LinearLayout>
+

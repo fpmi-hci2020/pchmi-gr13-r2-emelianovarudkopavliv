@@ -5,8 +5,6 @@
     <string name="repeat_password">Repeat password</string>
     <string name="sign_up">Sign up</string>
     <string name="sign_in">Sign in</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
     <string name="pre_order">Pre-order</string>
     <string name="add_to_cart">Add to Cart</string>
     <string name="add_to_favorites">Add to\nFavorites</string>
@@ -15,4 +13,12 @@
     <string name="author">author</string>
     <string name="genre">genre</string>
     <string name="publisher">publisher</string>
+    <string name="remove">remove</string>
+    <string name="payment">Payment</string>
+    <string name="delivery">delivery</string>
+    <string name="shipping">Shipping</string>
+    <string name="card">card</string>
+    <string name="pick_up">pick up</string>
+    <string name="cash">cash</string>
+    <string name="make_an_order">Make an order</string>
 </resources>

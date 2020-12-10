@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.hci.bookstore.models.Book
@@ -22,6 +23,8 @@ class BookFragment : Fragment() {
     private lateinit var descriptionView: TextView
     private lateinit var preOrderButton: Button
     private lateinit var addToCartButton: Button
+    private lateinit var addToFavoritesButton: Button
+    private lateinit var subscribeButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +41,8 @@ class BookFragment : Fragment() {
             } else return@setOnKeyListener false
         }
 
+        val service = BookStoreService(this)
+
         coverView = root.findViewById(R.id.bookCover)
         titleView = root.findViewById(R.id.bookTitle)
         authorView = root.findViewById(R.id.bookAuthor)
@@ -45,10 +50,31 @@ class BookFragment : Fragment() {
         descriptionView = root.findViewById(R.id.bookDescription)
         preOrderButton = root.findViewById(R.id.preOrderButton)
         addToCartButton = root.findViewById(R.id.addToCartButton)
+        addToFavoritesButton = root.findViewById(R.id.addToFavoritesButton)
+        subscribeButton = root.findViewById(R.id.subscribeButton)
+
+        preOrderButton.setOnClickListener{
+            //TODO
+            Toast.makeText(context, "Added to pre-order list", Toast.LENGTH_LONG).show()
+        }
+
+        addToCartButton.setOnClickListener{
+            //TODO
+            Toast.makeText(context, "Added to Cart", Toast.LENGTH_LONG).show()
+        }
+
+        addToFavoritesButton.setOnClickListener{
+            //TODO
+            Toast.makeText(context, "Added to Favorites", Toast.LENGTH_LONG).show()
+        }
+
+        subscribeButton.setOnClickListener{
+            //TODO
+            Toast.makeText(context, "Subscribed to news from publisher", Toast.LENGTH_LONG).show()
+        }
 
         val book = arguments!!.getParcelable<Book>("book")!!
         initBookInfo(book)
-        val service = BookStoreService(this)
         service.getBookCover(book.id, coverView)
 
         return root

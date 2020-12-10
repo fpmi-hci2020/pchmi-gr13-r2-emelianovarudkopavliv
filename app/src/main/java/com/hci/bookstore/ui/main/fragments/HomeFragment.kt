@@ -29,15 +29,17 @@ class HomeFragment : Fragment() {
         grid = root.findViewById(R.id.grid) as GridView
 
         grid.setOnItemClickListener { p, v, position, _ ->
-            val nextFrag = BookFragment()
+            val bookFragment = BookFragment()
 
             val arguments = Bundle()
             arguments.putParcelable("book", (grid.adapter as CatalogAdapter).getBookOnPosition(position))
-            nextFrag.arguments = arguments
+            bookFragment.arguments = arguments
+
             childFragmentManager.beginTransaction()
-                .replace(R.id.home_fragment, nextFrag)
+                .replace(R.id.home_fragment, bookFragment)
                 .addToBackStack(null)
                 .commit()
+
         }
 
         searchView = root.findViewById(R.id.searchView)

@@ -11,11 +11,11 @@ import com.hci.bookstore.models.Book
 import com.hci.bookstore.services.BookStoreService
 import com.hci.bookstore.R
 
-class CatalogAdapter(context: Context, books: Array<Book>, service: BookStoreService): BaseAdapter() {
+class CatalogAdapter(context: Context, private var books: Array<Book>,
+                     private val service: BookStoreService
+): BaseAdapter() {
 
-    private var books = books
     private val mContext: Context = context
-    private val service = service
 
     fun updateItems(newBooks: Array<Book>){
         books = newBooks
@@ -45,12 +45,12 @@ class CatalogAdapter(context: Context, books: Array<Book>, service: BookStoreSer
         val layoutInflater = LayoutInflater.from(mContext)
         view = convertView ?: layoutInflater.inflate(R.layout.book, null)
 
-        val imageView = view?.findViewById<ImageView>(R.id.catalogBookCover)
+        val coverView = view?.findViewById<ImageView>(R.id.catalogBookCover)
         val titleView = view?.findViewById<TextView>(R.id.catalogBookTitle)
         val authorView = view?.findViewById<TextView>(R.id.catalogBookAuthor)
         val priceView = view?.findViewById<TextView>(R.id.catalogBookPrice)
 
-        service.getBookCover(book.id, imageView!!)
+        service.getBookCover(book.id, coverView!!)
         titleView?.text = book.title
         authorView?.text = book.author
         priceView?.text = book.price.toString()

@@ -6,6 +6,12 @@
         <item name="android:textSize"> 20sp </item>
     </style>
 
+    <style name="AccentButton">
+        <item name="android:background">@color/accent</item>
+        <item name="android:textColor">@color/main</item>
+        <item name="android:textSize"> 20sp </item>
+    </style>
+
     <style name="SearchView" parent="Widget.AppCompat.SearchView">
         <item name="android:textColor">@color/main</item>
         <item name="android:textColorHint">@color/main</item>
@@ -39,7 +45,5 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
