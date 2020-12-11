@@ -20,6 +20,8 @@ class BookFragment : Fragment() {
     lateinit var titleView: TextView
     lateinit var authorView: TextView
     lateinit var priceView: TextView
+    lateinit var genreView: TextView
+    lateinit var publisherView: TextView
     private lateinit var descriptionView: TextView
     private lateinit var preOrderButton: Button
     private lateinit var addToCartButton: Button
@@ -47,6 +49,8 @@ class BookFragment : Fragment() {
         titleView = root.findViewById(R.id.bookTitle)
         authorView = root.findViewById(R.id.bookAuthor)
         priceView = root.findViewById(R.id.bookPrice)
+        genreView = root.findViewById(R.id.bookGenre)
+        publisherView = root.findViewById(R.id.bookPublisher)
         descriptionView = root.findViewById(R.id.bookDescription)
         preOrderButton = root.findViewById(R.id.preOrderButton)
         addToCartButton = root.findViewById(R.id.addToCartButton)
@@ -85,6 +89,8 @@ class BookFragment : Fragment() {
         authorView.text = book.author
         priceView.text = book.price.toString()
         descriptionView.text = book.description
+        genreView.text = book.genre
+        publisherView.text = book.publisher
         toggleButtons(book.isAvailable)
     }
 
