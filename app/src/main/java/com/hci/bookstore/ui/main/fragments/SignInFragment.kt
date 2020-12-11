@@ -41,7 +41,7 @@ class SignInFragment : Fragment(), View.OnClickListener {
             BookStoreService(this).getUser(email.text.toString())
         }
         else{
-            Toast.makeText(context, "Incorrect email!", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Incorrect title!", Toast.LENGTH_LONG).show()
         }
 
     }

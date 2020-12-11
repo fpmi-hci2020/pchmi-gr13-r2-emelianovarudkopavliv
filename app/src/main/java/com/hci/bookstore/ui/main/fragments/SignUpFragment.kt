@@ -53,7 +53,7 @@ class SignUpFragment : Fragment(), View.OnClickListener {
             }
         }
         else{
-            Toast.makeText(context, "Incorrect email!", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Incorrect title!", Toast.LENGTH_LONG).show()
         }
     }
 }

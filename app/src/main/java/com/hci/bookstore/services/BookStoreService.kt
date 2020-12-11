@@ -14,6 +14,7 @@ import org.json.JSONObject
 import com.google.gson.Gson
 import com.hci.bookstore.MainActivity
 import com.hci.bookstore.models.Book
+import com.hci.bookstore.models.News
 import com.hci.bookstore.models.Order
 import com.hci.bookstore.models.User
 import com.hci.bookstore.ui.main.*
@@ -39,7 +40,7 @@ class BookStoreService(var fragment: Fragment) {
                 }
             }, Response.ErrorListener { error ->
                 Toast.makeText(
-                    fragment.context, "User with this email already exists!",
+                    fragment.context, "User with this title already exists!",
                     Toast.LENGTH_LONG
                 ).show()
             })
@@ -64,7 +65,7 @@ class BookStoreService(var fragment: Fragment) {
                 }
             }, Response.ErrorListener { _ ->
                 Toast.makeText(
-                    fragment.context, "User with this email doesn't exist!",
+                    fragment.context, "User with this title doesn't exist!",
                     Toast.LENGTH_LONG
                 ).show()
             })
@@ -146,6 +147,25 @@ class BookStoreService(var fragment: Fragment) {
 
         mRequestQueue.add(request)
     }
+    //Change url
+    fun getNews() {
+        val request = JsonArrayRequest(
+            Request.Method.GET,
+            "$url/store/books", null, Response.Listener<JSONArray> { response ->
+                try {
+                    val newsFragment = fragment as FavoritesFragment
+                    val news = gson.fromJson(response.toString(), Array<News>::class.java)
+                    newsFragment.favoritesView.adapter = NewsAdapter(fragment.context!!, news)
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }, Response.ErrorListener { error ->
+                error.printStackTrace()
+            })
+
+        mRequestQueue.add(request)
+    }
+
 
     fun getBook(id: Int) {
         val request = JsonObjectRequest(
