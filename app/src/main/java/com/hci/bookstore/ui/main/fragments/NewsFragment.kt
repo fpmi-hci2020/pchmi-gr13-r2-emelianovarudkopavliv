@@ -8,15 +8,14 @@ import android.widget.ListView
 import androidx.fragment.app.Fragment
 import com.hci.bookstore.MainActivity
 import com.hci.bookstore.R
-import com.hci.bookstore.models.News
 import com.hci.bookstore.services.BookStoreService
-import com.hci.bookstore.ui.main.NewsAdapter
 
 class NewsFragment : Fragment() {
 
     lateinit var newsView: ListView
     lateinit var service: BookStoreService
     lateinit var email: String
+    private var isViewShown = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,24 +26,24 @@ class NewsFragment : Fragment() {
         newsView = root.findViewById<View>(R.id.newsView) as ListView
         service = BookStoreService(this)
         email = (activity as MainActivity).email
-        //service.getNews()
 
-        var news = News()
-        news.title = "New book you’re definitely interested in"
-        news.text = "You’ll love it, we promise! Just click here to preorder and it would be delivered to your doorstep as soon as it comes out."
-        news.publisher = "Aversav"
-        news.date = "20.11.2020"
-
-        val newsArray = arrayOf(news, news)
-        newsView.adapter = NewsAdapter(context!!, newsArray)
+        if(!isViewShown){
+            service.getNews(email)
+        }
 
         return root
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        if(isVisibleToUser){
-            //service.getNews(email)
+        if(view != null){
+            isViewShown = true
+            if(isVisibleToUser){
+                service.getNews(email)
+            }
+        }
+        else{
+            isViewShown = false
         }
     }
 }

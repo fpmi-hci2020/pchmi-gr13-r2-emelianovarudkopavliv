@@ -215,39 +215,20 @@ class BookStoreService(var fragment: Fragment) {
         mRequestQueue.add(request)
     }
 
-    //Change url
     fun getNews(email: String) {
         val request = JsonArrayRequest(
             Request.Method.GET,
-            "$url/store/books", null, Response.Listener<JSONArray> { response ->
+            "$url/accounts/news/$email", null, Response.Listener<JSONArray> { response ->
                 try {
-                    val newsFragment = fragment as FavoritesFragment
+                    val newsFragment = fragment as NewsFragment
                     val news = gson.fromJson(response.toString(), Array<News>::class.java)
-                    newsFragment.favoritesView.adapter = NewsAdapter(fragment.context!!, news)
+                    newsFragment.newsView.adapter = NewsAdapter(fragment.context!!, news)
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
             }, Response.ErrorListener { error ->
                 error.printStackTrace()
             })
-
-        mRequestQueue.add(request)
-    }
-
-
-    fun getBook(id: Int) {
-        val request = JsonObjectRequest(
-            Request.Method.GET,
-            "$url/store/books$id", null, Response.Listener<JSONObject> { response ->
-                try {
-                    var book = gson.fromJson(response.toString(), Book::class.java)
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                }
-            }, Response.ErrorListener { error ->
-                error.printStackTrace()
-            })
-
         mRequestQueue.add(request)
     }
 

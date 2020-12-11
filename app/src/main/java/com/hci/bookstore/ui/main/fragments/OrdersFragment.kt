@@ -17,17 +17,22 @@ class OrdersFragment : Fragment() {
     lateinit var ordersView: ListView
     lateinit var service: BookStoreService
     lateinit var email: String
+    private var isViewShown = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.orders_fragment, container, false)
-        ordersView = root.findViewById<View>(R.id.ordersView) as ListView
 
+        ordersView = root.findViewById<View>(R.id.ordersView) as ListView
         service = BookStoreService(this)
         email = (activity as MainActivity).email
         //service.getOrders()
+
+        if(!isViewShown){
+            service.getOrders(email)
+        }
 
         var order = Order()
         order.orderDate = "12.03.2020"
@@ -42,8 +47,14 @@ class OrdersFragment : Fragment() {
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        if(isVisibleToUser){
-            //service.getOrders(email)
+        if(view != null){
+            isViewShown = true
+            if(isVisibleToUser){
+                service.getOrders(email)
+            }
+        }
+        else{
+            isViewShown = false
         }
     }
 }

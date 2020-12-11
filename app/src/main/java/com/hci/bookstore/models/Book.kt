@@ -3,6 +3,7 @@ package com.hci.bookstore.models
 import android.annotation.SuppressLint
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 
 class Book :  Parcelable {
     var id: Int = 0
@@ -12,6 +13,8 @@ class Book :  Parcelable {
     lateinit var description: String
     lateinit var publisher: String
     var price: Float = 0f
+
+    @SerializedName("availability")
     var isAvailable: Boolean = true
 
     @SuppressLint("NewApi")

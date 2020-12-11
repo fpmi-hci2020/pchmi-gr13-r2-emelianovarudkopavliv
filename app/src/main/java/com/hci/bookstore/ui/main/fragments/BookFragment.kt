@@ -15,7 +15,6 @@ import com.hci.bookstore.MainActivity
 import com.hci.bookstore.models.Book
 import com.hci.bookstore.services.BookStoreService
 import com.hci.bookstore.R
-import com.hci.bookstore.models.BookInCart
 import com.hci.bookstore.models.CartRequest
 
 class BookFragment : Fragment() {
@@ -95,7 +94,6 @@ class BookFragment : Fragment() {
         priceView.text = book.price.toString()
         descriptionView.text = book.description
         genreView.text = book.genre
-        book.publisher =  "Aversav"
         publisherView.text = book.publisher
         toggleButtons(book.isAvailable)
     }
