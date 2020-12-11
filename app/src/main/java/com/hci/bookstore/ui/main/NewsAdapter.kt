@@ -20,6 +20,7 @@ class NewsAdapter (context: Context, news: Array<News>): BaseAdapter() {
         lateinit var titleView: TextView
         lateinit var textView: TextView
         lateinit var publisherView: TextView
+        lateinit var dateView: TextView
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -35,6 +36,7 @@ class NewsAdapter (context: Context, news: Array<News>): BaseAdapter() {
             holder.titleView = view.findViewById(R.id.newsTitle) as TextView
             holder.textView = view.findViewById(R.id.newsText) as TextView
             holder.publisherView = view.findViewById(R.id.newsPublisher) as TextView
+            holder.dateView = view.findViewById(R.id.newsDate) as TextView
 
             view.tag = holder
 
@@ -47,6 +49,7 @@ class NewsAdapter (context: Context, news: Array<News>): BaseAdapter() {
         holder.titleView.text = news.title
         holder.textView.text = news.text
         holder.publisherView.text = news.publisher
+        holder.dateView.text = news.date
         if(convertView != null) {
             return convertView
         }

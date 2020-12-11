@@ -30,6 +30,7 @@ class NewsFragment : Fragment() {
         news.title = "New book you’re definitely interested in"
         news.text = "You’ll love it, we promise! Just click here to preorder and it would be delivered to your doorstep as soon as it comes out."
         news.publisher = "Aversav"
+        news.date = "20.11.2020"
 
         val newsArray = arrayOf(news, news)
         newsView.adapter = NewsAdapter(context!!, newsArray)
