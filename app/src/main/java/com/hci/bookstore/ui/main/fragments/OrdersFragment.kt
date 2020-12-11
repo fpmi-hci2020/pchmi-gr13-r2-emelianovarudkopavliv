@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import androidx.fragment.app.Fragment
+import com.hci.bookstore.MainActivity
 import com.hci.bookstore.R
 import com.hci.bookstore.models.Order
 import com.hci.bookstore.services.BookStoreService
@@ -14,6 +15,8 @@ import com.hci.bookstore.ui.main.OrdersAdapter
 class OrdersFragment : Fragment() {
 
     lateinit var ordersView: ListView
+    lateinit var service: BookStoreService
+    lateinit var email: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,7 +25,8 @@ class OrdersFragment : Fragment() {
         val root = inflater.inflate(R.layout.orders_fragment, container, false)
         ordersView = root.findViewById<View>(R.id.ordersView) as ListView
 
-        val service = BookStoreService(this)
+        service = BookStoreService(this)
+        email = (activity as MainActivity).email
         //service.getOrders()
 
         var order = Order()
@@ -34,5 +38,12 @@ class OrdersFragment : Fragment() {
         ordersView.adapter = OrdersAdapter(context!!, orders)
 
         return root
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if(isVisibleToUser){
+            //service.getOrders(email)
+        }
     }
 }

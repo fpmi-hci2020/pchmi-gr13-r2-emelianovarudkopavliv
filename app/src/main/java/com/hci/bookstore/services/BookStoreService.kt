@@ -152,7 +152,7 @@ class BookStoreService(var fragment: Fragment) {
     }
 
     //Change url
-    fun getOrders() {
+    fun getOrders(email: String) {
         val request = JsonArrayRequest(
             Request.Method.GET,
             "$url/store/books", null, Response.Listener<JSONArray> { response ->
@@ -170,15 +170,14 @@ class BookStoreService(var fragment: Fragment) {
         mRequestQueue.add(request)
     }
 
-    //Change url
-    fun getBooksInFavorites() {
+    fun getBooksInFavorites(email: String) {
         val request = JsonArrayRequest(
             Request.Method.GET,
-            "$url/store/books", null, Response.Listener<JSONArray> { response ->
+            "$url/accounts/favorites/$email", null, Response.Listener<JSONArray> { response ->
                 try {
                     val favorites = fragment as FavoritesFragment
-                    val books = gson.fromJson(response.toString(), Array<Book>::class.java)
-                    favorites.favoritesView.adapter = FavoritesAdapter(fragment.context!!, books, this)
+                    val books = gson.fromJson(response.toString(), Array<BookInCart>::class.java)
+                    favorites.favoritesView.adapter = FavoritesAdapter(fragment.context!!, books, email,this)
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
@@ -188,8 +187,36 @@ class BookStoreService(var fragment: Fragment) {
 
         mRequestQueue.add(request)
     }
+
+    fun addToFavorites (cartRequest: CartRequest) {
+        val request = JsonObjectRequest(
+            Request.Method.POST,
+            "$url/accounts/favorites",
+            JSONObject(gson.toJson(cartRequest)),
+            Response.Listener<JSONObject> { _ ->
+                try {
+                    Toast.makeText(fragment.context, "Added to Favorites", Toast.LENGTH_LONG).show()
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }, Response.ErrorListener {  error ->
+                error.printStackTrace()
+            })
+        mRequestQueue.add(request)
+    }
+
+    fun removeFromFavorites(email: String, bookId: Int) {
+        val request = JsonObjectRequest(
+            Request.Method.DELETE,
+            "$url/accounts/$email/$bookId", null, Response.Listener<JSONObject> {},
+            Response.ErrorListener {  error ->
+                error.printStackTrace()
+            })
+        mRequestQueue.add(request)
+    }
+
     //Change url
-    fun getNews() {
+    fun getNews(email: String) {
         val request = JsonArrayRequest(
             Request.Method.GET,
             "$url/store/books", null, Response.Listener<JSONArray> { response ->

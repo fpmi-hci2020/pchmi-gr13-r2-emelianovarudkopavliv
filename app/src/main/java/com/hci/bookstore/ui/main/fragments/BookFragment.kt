@@ -78,15 +78,13 @@ class BookFragment : Fragment() {
         }
 
         addToFavoritesButton.setOnClickListener{
-            //TODO
-            Toast.makeText(context, "Added to Favorites", Toast.LENGTH_LONG).show()
+            service.addToFavorites(CartRequest(email, book.id, 0))
         }
 
         subscribeButton.setOnClickListener{
             //TODO
             Toast.makeText(context, "Subscribed to news from publisher", Toast.LENGTH_LONG).show()
         }
-
 
         return root
     }

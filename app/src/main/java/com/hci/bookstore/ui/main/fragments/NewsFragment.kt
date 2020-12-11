@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import androidx.fragment.app.Fragment
+import com.hci.bookstore.MainActivity
 import com.hci.bookstore.R
 import com.hci.bookstore.models.News
 import com.hci.bookstore.services.BookStoreService
@@ -14,6 +15,8 @@ import com.hci.bookstore.ui.main.NewsAdapter
 class NewsFragment : Fragment() {
 
     lateinit var newsView: ListView
+    lateinit var service: BookStoreService
+    lateinit var email: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,8 +25,8 @@ class NewsFragment : Fragment() {
         val root = inflater.inflate(R.layout.news_fragment, container, false)
 
         newsView = root.findViewById<View>(R.id.newsView) as ListView
-
-        val service = BookStoreService(this)
+        service = BookStoreService(this)
+        email = (activity as MainActivity).email
         //service.getNews()
 
         var news = News()
@@ -36,5 +39,12 @@ class NewsFragment : Fragment() {
         newsView.adapter = NewsAdapter(context!!, newsArray)
 
         return root
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if(isVisibleToUser){
+            //service.getNews(email)
+        }
     }
 }
