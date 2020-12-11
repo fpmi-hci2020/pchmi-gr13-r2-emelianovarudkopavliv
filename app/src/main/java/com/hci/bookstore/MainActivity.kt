@@ -11,6 +11,9 @@ import com.hci.bookstore.ui.main.CartAdapter
 import com.hci.bookstore.ui.main.SectionsPagerAdapter
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
+
+    lateinit var email: String
+
     override fun onClick(v: View?) {
         startActivity(Intent(this, LoginActivity::class.java))
     }
@@ -18,6 +21,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        email = intent.getStringExtra("email");
 
         val sectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
         val viewPager: ViewPager = findViewById(R.id.view_pager)

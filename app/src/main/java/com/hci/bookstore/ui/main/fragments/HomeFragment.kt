@@ -16,6 +16,9 @@ class HomeFragment : Fragment() {
     lateinit var catalogGrid: GridView
     lateinit var searchView: SearchView
     lateinit var filtersGroup: RadioGroup
+    lateinit var service: BookStoreService
+
+    private var isViewShown = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,23 +26,14 @@ class HomeFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.home_fragment, container, false)
 
-        val service = BookStoreService(this)
-        service.getBooks()
+        service = BookStoreService(this)
+        if(!isViewShown){
+            service.getBooks()
+        }
 
         catalogGrid = root.findViewById(R.id.grid) as GridView
-
         catalogGrid.setOnItemClickListener { p, v, position, _ ->
-            val bookFragment = BookFragment()
-
-            val arguments = Bundle()
-            arguments.putParcelable("book", (catalogGrid.adapter as CatalogAdapter).getBookOnPosition(position))
-            bookFragment.arguments = arguments
-
-            childFragmentManager.beginTransaction()
-                .replace(R.id.home_fragment, bookFragment)
-                .addToBackStack(null)
-                .commit()
-
+           loadBookFragment(position)
         }
 
         searchView = root.findViewById(R.id.searchView)
@@ -54,6 +48,7 @@ class HomeFragment : Fragment() {
                 return false
             }
         })
+
         val closeButtonId = searchView.context.resources.getIdentifier("android:id/search_close_btn", null, null);
         val closeButton = searchView.findViewById<ImageView>(closeButtonId)
         closeButton.setOnClickListener {
@@ -64,6 +59,31 @@ class HomeFragment : Fragment() {
         filtersGroup = root.findViewById(R.id.filterGroup)
 
         return root
+    }
+
+    private fun loadBookFragment(position: Int){
+        val bookFragment = BookFragment()
+        val arguments = Bundle()
+        arguments.putParcelable("book", (catalogGrid.adapter as CatalogAdapter).getBookOnPosition(position))
+        bookFragment.arguments = arguments
+
+        childFragmentManager.beginTransaction()
+            .replace(R.id.home_fragment, bookFragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if(view != null){
+            isViewShown = true
+            if(isVisibleToUser){
+                service.getBooks()
+            }
+        }
+        else{
+            isViewShown = false
+        }
     }
 
     private fun searchByFilter(tag: String) {

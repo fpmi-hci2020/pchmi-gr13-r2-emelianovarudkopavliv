@@ -4,16 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ListView
 import androidx.fragment.app.Fragment
+import com.hci.bookstore.MainActivity
 import com.hci.bookstore.R
 import com.hci.bookstore.services.BookStoreService
-import com.hci.bookstore.ui.main.CartAdapter
 
 class CartFragment : Fragment() {
 
     lateinit var cartView: ListView
+    lateinit var service: BookStoreService
+    lateinit var email: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,9 +24,16 @@ class CartFragment : Fragment() {
 
         cartView = root.findViewById<View>(R.id.cartView) as ListView
 
-        val service = BookStoreService(this)
-        service.getBooksInCart()
+        service = BookStoreService(this)
+        email = (activity as MainActivity).email
 
         return root
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if(isVisibleToUser){
+            service.getBooksInCart(email)
+        }
     }
 }

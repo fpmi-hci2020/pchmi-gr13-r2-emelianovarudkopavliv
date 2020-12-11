@@ -11,9 +11,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.hci.bookstore.MainActivity
 import com.hci.bookstore.models.Book
 import com.hci.bookstore.services.BookStoreService
 import com.hci.bookstore.R
+import com.hci.bookstore.models.BookInCart
+import com.hci.bookstore.models.CartRequest
 
 class BookFragment : Fragment() {
     lateinit var coverView: ImageView
@@ -27,6 +30,7 @@ class BookFragment : Fragment() {
     private lateinit var addToCartButton: Button
     private lateinit var addToFavoritesButton: Button
     private lateinit var subscribeButton: Button
+    private lateinit var email: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,14 +61,20 @@ class BookFragment : Fragment() {
         addToFavoritesButton = root.findViewById(R.id.addToFavoritesButton)
         subscribeButton = root.findViewById(R.id.subscribeButton)
 
+        email = (activity as MainActivity).email
+
+        val book = arguments!!.getParcelable<Book>("book")!!
+        initBookInfo(book)
+        service.getBookCover(book.id, coverView)
+
+
         preOrderButton.setOnClickListener{
             //TODO
             Toast.makeText(context, "Added to pre-order list", Toast.LENGTH_LONG).show()
         }
 
         addToCartButton.setOnClickListener{
-            //TODO
-            Toast.makeText(context, "Added to Cart", Toast.LENGTH_LONG).show()
+            service.addToCart(CartRequest(email, book.id, 1))
         }
 
         addToFavoritesButton.setOnClickListener{
@@ -77,9 +87,6 @@ class BookFragment : Fragment() {
             Toast.makeText(context, "Subscribed to news from publisher", Toast.LENGTH_LONG).show()
         }
 
-        val book = arguments!!.getParcelable<Book>("book")!!
-        initBookInfo(book)
-        service.getBookCover(book.id, coverView)
 
         return root
     }
@@ -90,6 +97,7 @@ class BookFragment : Fragment() {
         priceView.text = book.price.toString()
         descriptionView.text = book.description
         genreView.text = book.genre
+        book.publisher =  "Aversav"
         publisherView.text = book.publisher
         toggleButtons(book.isAvailable)
     }
