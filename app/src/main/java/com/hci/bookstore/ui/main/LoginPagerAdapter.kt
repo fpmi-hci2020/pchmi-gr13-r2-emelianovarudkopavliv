@@ -13,7 +13,7 @@ private val TAB_TITLES = arrayOf(
     R.string.sign_up
 )
 
-class SectionsPagerAdapter2(private val context: Context, fm: FragmentManager) :
+class LoginPagerAdapter(private val context: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {

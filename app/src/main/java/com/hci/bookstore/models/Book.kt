@@ -26,6 +26,15 @@ class Book :  Parcelable {
         isAvailable = parcel.readBoolean()
     }
 
+    constructor(id:Int, title: String, author: String, genre: String, description: String, price: Float) {
+        this.id = id
+        this.title = title
+        this.author = author
+        this.genre = genre
+        this.description = description
+        this.price = price
+    }
+
     constructor(){}
 
     @SuppressLint("NewApi")

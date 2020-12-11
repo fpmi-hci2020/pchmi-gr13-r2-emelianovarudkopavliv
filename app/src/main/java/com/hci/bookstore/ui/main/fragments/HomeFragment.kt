@@ -13,7 +13,7 @@ import com.hci.bookstore.ui.main.CatalogAdapter
 
 class HomeFragment : Fragment() {
     lateinit var books: Array<Book>
-    lateinit var grid: GridView
+    lateinit var catalogGrid: GridView
     lateinit var searchView: SearchView
     lateinit var filtersGroup: RadioGroup
 
@@ -26,13 +26,13 @@ class HomeFragment : Fragment() {
         val service = BookStoreService(this)
         service.getBooks()
 
-        grid = root.findViewById(R.id.grid) as GridView
+        catalogGrid = root.findViewById(R.id.grid) as GridView
 
-        grid.setOnItemClickListener { p, v, position, _ ->
+        catalogGrid.setOnItemClickListener { p, v, position, _ ->
             val bookFragment = BookFragment()
 
             val arguments = Bundle()
-            arguments.putParcelable("book", (grid.adapter as CatalogAdapter).getBookOnPosition(position))
+            arguments.putParcelable("book", (catalogGrid.adapter as CatalogAdapter).getBookOnPosition(position))
             bookFragment.arguments = arguments
 
             childFragmentManager.beginTransaction()
@@ -58,7 +58,7 @@ class HomeFragment : Fragment() {
         val closeButton = searchView.findViewById<ImageView>(closeButtonId)
         closeButton.setOnClickListener {
             searchView.setQuery("", false)
-            (grid.adapter as CatalogAdapter).updateItems(books)
+            (catalogGrid.adapter as CatalogAdapter).updateItems(books)
         }
 
         filtersGroup = root.findViewById(R.id.filterGroup)
@@ -73,7 +73,7 @@ class HomeFragment : Fragment() {
             "genre" -> books.filter { book -> containsQuery(book.genre)}.toTypedArray()
             else -> books.filter { book -> containsQuery(book.publisher)}.toTypedArray()
         }
-        (grid.adapter as CatalogAdapter).updateItems(filteredBooks)
+        (catalogGrid.adapter as CatalogAdapter).updateItems(filteredBooks)
     }
 
     private fun containsQuery(field: String) : Boolean{

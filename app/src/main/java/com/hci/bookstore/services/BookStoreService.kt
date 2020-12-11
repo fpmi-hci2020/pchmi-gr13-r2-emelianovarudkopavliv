@@ -14,11 +14,10 @@ import org.json.JSONObject
 import com.google.gson.Gson
 import com.hci.bookstore.MainActivity
 import com.hci.bookstore.models.Book
+import com.hci.bookstore.models.Order
 import com.hci.bookstore.models.User
 import com.hci.bookstore.ui.main.*
-import com.hci.bookstore.ui.main.fragments.CartFragment
-import com.hci.bookstore.ui.main.fragments.HomeFragment
-import com.hci.bookstore.ui.main.fragments.SignInFragment
+import com.hci.bookstore.ui.main.fragments.*
 import org.json.JSONArray
 
 
@@ -80,7 +79,7 @@ class BookStoreService(var fragment: Fragment) {
                 try {
                     val home = fragment as HomeFragment
                     home.books = gson.fromJson(response.toString(), Array<Book>::class.java)
-                    home.grid.adapter = CatalogAdapter(fragment.context!!, home.books, this)
+                    home.catalogGrid.adapter = CatalogAdapter(fragment.context!!, home.books, this)
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
@@ -100,6 +99,44 @@ class BookStoreService(var fragment: Fragment) {
                     val cart = fragment as CartFragment
                     val books = gson.fromJson(response.toString(), Array<Book>::class.java)
                     cart.cartView.adapter = CartAdapter(fragment.context!!, books, this)
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }, Response.ErrorListener { error ->
+                error.printStackTrace()
+            })
+
+        mRequestQueue.add(request)
+    }
+
+    //Change url
+    fun getOrders() {
+        val request = JsonArrayRequest(
+            Request.Method.GET,
+            "$url/store/books", null, Response.Listener<JSONArray> { response ->
+                try {
+                    val ordersFragment = fragment as OrdersFragment
+                    val orders = gson.fromJson(response.toString(), Array<Order>::class.java)
+                    ordersFragment.ordersView.adapter = OrdersAdapter(fragment.context!!, orders)
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }, Response.ErrorListener { error ->
+                error.printStackTrace()
+            })
+
+        mRequestQueue.add(request)
+    }
+
+    //Change url
+    fun getBooksInFavorites() {
+        val request = JsonArrayRequest(
+            Request.Method.GET,
+            "$url/store/books", null, Response.Listener<JSONArray> { response ->
+                try {
+                    val favorites = fragment as FavoritesFragment
+                    val books = gson.fromJson(response.toString(), Array<Book>::class.java)
+                    favorites.favoritesView.adapter = FavoritesAdapter(fragment.context!!, books, this)
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
