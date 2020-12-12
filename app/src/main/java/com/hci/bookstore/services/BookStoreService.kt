@@ -98,8 +98,8 @@ class BookStoreService(var fragment: Fragment) {
             "$url/store/cart/$email", null, Response.Listener<JSONArray> { response ->
                 try {
                     val cart = fragment as CartFragment
-                    val books = gson.fromJson(response.toString(), Array<BookInCart>::class.java)
-                    cart.cartView.adapter = CartAdapter(fragment.context!!, books, email, this)
+                    cart.books = gson.fromJson(response.toString(), Array<BookInCart>::class.java)
+                    cart.cartView.adapter = CartAdapter(fragment.context!!, cart.books, email, this)
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
@@ -151,15 +151,14 @@ class BookStoreService(var fragment: Fragment) {
         mRequestQueue.add(request)
     }
 
-    //Change url
     fun getOrders(email: String) {
         val request = JsonArrayRequest(
             Request.Method.GET,
-            "$url/store/books", null, Response.Listener<JSONArray> { response ->
+            "$url/store/order/$email", null, Response.Listener<JSONArray> { response ->
                 try {
                     val ordersFragment = fragment as OrdersFragment
                     val orders = gson.fromJson(response.toString(), Array<Order>::class.java)
-                    ordersFragment.ordersView.adapter = OrdersAdapter(fragment.context!!, orders)
+                    ordersFragment.ordersView.adapter = OrdersAdapter(fragment.context!!, orders, this)
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
@@ -167,6 +166,50 @@ class BookStoreService(var fragment: Fragment) {
                 error.printStackTrace()
             })
 
+        mRequestQueue.add(request)
+    }
+
+    fun makeOrder(order: Order) {
+        val request = JsonObjectRequest(
+            Request.Method.POST,
+            "$url/store/order/",
+            JSONObject(gson.toJson(order)),
+            Response.Listener<JSONObject> { _ ->
+                try {
+                    Toast.makeText(fragment.context, "Added to Orders", Toast.LENGTH_LONG).show()
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }, Response.ErrorListener {  error ->
+                error.printStackTrace()
+            })
+        mRequestQueue.add(request)
+    }
+
+    fun makePreOrder(cartRequest: CartRequest) {
+        val request = JsonObjectRequest(
+            Request.Method.POST,
+            "$url/store/order/preorder",
+            JSONObject(gson.toJson(cartRequest)),
+            Response.Listener<JSONObject> { _ ->
+                try {
+                    Toast.makeText(fragment.context, "Added to pre-order list", Toast.LENGTH_LONG).show()
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }, Response.ErrorListener {  error ->
+                error.printStackTrace()
+            })
+        mRequestQueue.add(request)
+    }
+
+    fun cancelOrder(orderId: Int) {
+        val request = JsonObjectRequest(
+            Request.Method.DELETE,
+            "$url/store/order/$orderId", null, Response.Listener<JSONObject> {},
+            Response.ErrorListener {  error ->
+                error.printStackTrace()
+            })
         mRequestQueue.add(request)
     }
 
@@ -227,6 +270,27 @@ class BookStoreService(var fragment: Fragment) {
                     e.printStackTrace()
                 }
             }, Response.ErrorListener { error ->
+                error.printStackTrace()
+            })
+        mRequestQueue.add(request)
+    }
+
+    fun subscribeToNews(email: String, publisher: String) {
+        val data = HashMap<String, String>()
+        data["account"] = email
+        data["publisher"] = publisher
+
+        val request = JsonObjectRequest(
+            Request.Method.POST,
+            "$url/accounts/news/subscribe",
+            JSONObject(data as Map<*, *>),
+            Response.Listener<JSONObject> { _ ->
+                try {
+                    Toast.makeText(fragment.context, "Subscribed to news from publisher", Toast.LENGTH_LONG).show()
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }, Response.ErrorListener {  error ->
                 error.printStackTrace()
             })
         mRequestQueue.add(request)

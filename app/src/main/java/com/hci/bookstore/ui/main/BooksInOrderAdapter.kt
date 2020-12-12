@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
 import com.hci.bookstore.R
-import com.hci.bookstore.models.Book
+import com.hci.bookstore.models.BookInCart
 
-class BooksInOrderAdapter (context: Context, var books: Array<Book>)  :
+class BooksInOrderAdapter (context: Context, var books: Array<BookInCart>)  :
     RecyclerView.Adapter<BooksInOrderAdapter.ViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
@@ -24,16 +24,12 @@ class BooksInOrderAdapter (context: Context, var books: Array<Book>)  :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val book = books[position]
-        //COUNT
-        holder.bookInfoView.text = "\"${book.title}\", ${book.author} - 3 item(s)"
+        val bookInCart = books[position]
+        holder.bookInfoView.text = "\"${bookInCart.book.title}\", ${bookInCart.book.author}" +
+                " - ${bookInCart.count}"
     }
 
     override fun getItemCount(): Int {
         return books.size
-    }
-
-    internal fun getItem(id: Int): Book {
-        return books[id]
     }
 }

@@ -1,9 +1,22 @@
 package com.hci.bookstore.models
 
-class Order{
+import com.google.gson.annotations.SerializedName
+
+class Order(
+    @SerializedName("payment_method") var paymentMethod: String,
+    @SerializedName("shipping_method") var shippingMethod: String,
+    var books: Array<BookInCart>,
+    @SerializedName("account") var email: String) {
+
     var id: Int = 0
-    lateinit var books: Array<Book>
-    lateinit var orderDate: String
-    lateinit var shipDate: String
+
+    @SerializedName("price")
     var totalPrice: Float = 0f
+
+    @SerializedName("date_placed")
+    var orderDate: String = ""
+
+    @SerializedName("date_delivered")
+    var shipDate: String = ""
+
 }

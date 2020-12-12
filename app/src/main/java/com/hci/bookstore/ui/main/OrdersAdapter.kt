@@ -11,8 +11,10 @@ import com.hci.bookstore.R
 import com.hci.bookstore.models.Order
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hci.bookstore.models.Book
+import com.hci.bookstore.services.BookStoreService
 
-class OrdersAdapter (context: Context, orders: Array<Order>): BaseAdapter() {
+class OrdersAdapter (context: Context, orders: Array<Order>,
+                     private val service: BookStoreService): BaseAdapter() {
 
     private var ordersContext = context
     private var orders = orders.toMutableList()
@@ -49,7 +51,7 @@ class OrdersAdapter (context: Context, orders: Array<Order>): BaseAdapter() {
             holder.cancelButton  = view.findViewById(R.id.orderCancelButton) as Button
 
             holder.cancelButton.setOnClickListener{
-                //call service
+                service.cancelOrder(orders[position].id)
                 orders.removeAt(position)
                 notifyDataSetChanged()
             }
@@ -65,13 +67,9 @@ class OrdersAdapter (context: Context, orders: Array<Order>): BaseAdapter() {
         holder.orderNumView.text = "Order № ${position + 1}"
         holder.orderDateView.text = "Order date: ${order.orderDate}"
         holder.shipDateView.text = "Ship date: ${order.shipDate}"
-        holder.priceView.text = "Total price: ${order.totalPrice}"
+        holder.priceView.text = order.totalPrice.toString()
 
-        //CHANGE
-        //Get from order
-        val book  =  Book(1, "The Forest", "Li Smith", "sci-fi", "February", 20.5f)
-        val books = arrayOf(book, book, book)
-        val adapter = BooksInOrderAdapter(ordersContext, books)
+        val adapter = BooksInOrderAdapter(ordersContext, orders[position].books)
         holder.ordersView.adapter = adapter
 
         if(convertView != null) {

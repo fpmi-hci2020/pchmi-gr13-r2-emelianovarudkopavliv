@@ -8,9 +8,7 @@ import android.widget.ListView
 import androidx.fragment.app.Fragment
 import com.hci.bookstore.MainActivity
 import com.hci.bookstore.R
-import com.hci.bookstore.models.Order
 import com.hci.bookstore.services.BookStoreService
-import com.hci.bookstore.ui.main.OrdersAdapter
 
 class OrdersFragment : Fragment() {
 
@@ -28,20 +26,10 @@ class OrdersFragment : Fragment() {
         ordersView = root.findViewById<View>(R.id.ordersView) as ListView
         service = BookStoreService(this)
         email = (activity as MainActivity).email
-        //service.getOrders()
 
         if(!isViewShown){
             service.getOrders(email)
         }
-
-        var order = Order()
-        order.orderDate = "12.03.2020"
-        order.shipDate = "15.03.2020"
-        order.totalPrice = 20.56f
-
-        val orders = arrayOf(order, order)
-        ordersView.adapter = OrdersAdapter(context!!, orders)
-
         return root
     }
 

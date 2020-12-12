@@ -31,11 +31,11 @@ class CatalogAdapter(context: Context, private var books: Array<Book>,
     }
 
     override fun getItemId(position: Int): Long {
-        return 0
+        return position.toLong()
     }
 
     override fun getItem(position: Int): Any? {
-        return null
+        return books[position]
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View? {

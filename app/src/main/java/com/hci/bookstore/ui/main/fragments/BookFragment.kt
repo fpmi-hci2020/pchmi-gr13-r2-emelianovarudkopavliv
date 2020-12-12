@@ -68,8 +68,7 @@ class BookFragment : Fragment() {
 
 
         preOrderButton.setOnClickListener{
-            //TODO
-            Toast.makeText(context, "Added to pre-order list", Toast.LENGTH_LONG).show()
+            service.makePreOrder(CartRequest(email, book.id, 1))
         }
 
         addToCartButton.setOnClickListener{
@@ -81,8 +80,7 @@ class BookFragment : Fragment() {
         }
 
         subscribeButton.setOnClickListener{
-            //TODO
-            Toast.makeText(context, "Subscribed to news from publisher", Toast.LENGTH_LONG).show()
+            service.subscribeToNews(email, book.publisher)
         }
 
         return root
